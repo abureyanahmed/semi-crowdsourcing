@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="citation_info.js"></script>
+<script src="FAW_citation_info.js"></script>
+<script src="COCOA_citation_info.js"></script>
+<script src="IWOCA_citation_info.js"></script>
+<script src="COCOON_citation_info.js"></script>
+<script src="FUN_citation_info.js"></script>
+<script src="TAMC_citation_info.js"></script>
+<script src="WG_citation_info.js"></script>
+</head>
+<body>
+
+<h2>Citation interface</h2>
+<div>
+<!-- <label for="volume">Proceeding link:</label>
+<input type='text' name='volume' id='volume'> -->
+<label for="conference">Conference:</label>
+<input type='text' name='conference' id='conference'>
+<label for="year">Year:</label>
+<input type='text' name='year' id='year'>
+<button onclick="submit_button_clicked()">Submit</button>
+<!-- <button onclick="close_button_clicked()">Close</button> -->
+</div>
+
+<script>
+//var volume = {'2007': '', '2008': 'LNCS 4921', '2009': 'LNCS 5431', '2010': 'LNCS 5942', '2011': 'LNCS 6552', '2012': 'LNCS 7157', '2013': 'LNCS 7748', '2014': 'LNCS 8344', '2015': 'LNCS 8973', '2016': 'LNCS 9627', '2017': 'LNCS 10167', '2018': 'LNCS 10755', '2019': 'LNCS 11355', '2020': 'LNCS 12049'};
+function parse_proceeding_page(x)
+{
+     alert(x); 
+}
+function submit_button_clicked()
+{
+  //document.getElementById('citation_page_frame').src = "https://scholar.google.com/scholar?hl=en&q=LNCS+" + document.getElementById("volume").value;
+  //document.getElementById('citation_page_frame').src = "https://scholar.google.com/embed/LNCS+" + document.getElementById("volume").value;
+
+  //document.getElementById('citation_page_frame').src = document.getElementById("volume").value;
+  //document.getElementById('citation_page_frame').onload = parse_proceeding_page();
+  /*fetch(document.getElementById("volume").value)
+  .then(data => console.log(data));
+  var req = new XMLHttpRequest();  
+  req.open('GET', document.getElementById("volume").value, false);   
+  req.send(null);  
+  if(req.status == 200)  
+    parse_proceeding_page(req.responseText);*/
+  /*year = {};
+  Object.keys(volume).forEach(function(key){
+    year[volume[key]] = key;
+  });
+  var key = 'LNCS '+document.getElementById("volume").value;
+  if(key in year)
+  {
+    var papers = document.getElementById('paper_div');
+    papers.innerHTML = '';
+    var paper_arr = citations_info[year[key]];
+    for(var i=0;i<paper_arr.length-1;i++){
+      papers.innerHTML += paper_arr[i][0] + '<br>';
+      window.open("https://scholar.google.com/scholar?hl=en&q=" + paper_arr[i][0]);
+    }
+  }
+  else alert("The volume is not present!");*/
+  conference_citation_info = {};
+  if(document.getElementById("conference").value=="FAW")
+    conference_citation_info = FAW_citation_info;
+  else if(document.getElementById("conference").value=="COCOA")
+    conference_citation_info = COCOA_citation_info;
+  else if(document.getElementById("conference").value=="IWOCA")
+    conference_citation_info = IWOCA_citation_info;
+  else if(document.getElementById("conference").value=="COCOON")
+    conference_citation_info = COCOON_citation_info;
+  else if(document.getElementById("conference").value=="FUN")
+    conference_citation_info = FUN_citation_info;
+  else if(document.getElementById("conference").value=="TAMC")
+    conference_citation_info = TAMC_citation_info;
+  else if(document.getElementById("conference").value=="WG")
+    conference_citation_info = WG_citation_info;
+  year = document.getElementById("year").value;
+  if(year in conference_citation_info)
+  {
+    var papers = document.getElementById('paper_div');
+    papers.innerHTML = '';
+    var paper_arr = conference_citation_info[year];
+    for(var i=0;i<paper_arr.length-1;i++){
+      papers.innerHTML += paper_arr[i][0] + '<br>';
+      window.open("https://scholar.google.com/scholar?hl=en&q=" + paper_arr[i][0]);
+    }
+  }
+  else alert("The year is not present");
+
+  //wnd = window.open("https://scholar.google.com/scholar?hl=en&q=LNCS+" + document.getElementById("volume").value);
+}
+function close_button_clicked()
+{
+  alert(wnd.document.body.innerHTML);
+  wnd.close();
+}
+</script>
+
+<div id='paper_div'></div>
+<!-- <iframe src="http://walcom-conference.org/" title="Google scholar citations" id="citation_page_frame"> -->
+</iframe>
+<!-- <div> 
+    <object type="text/html" data="https://scholar.google.com&output=embed" width="800px" height="600px" style="overflow:auto;border:5px ridge blue">
+    </object>
+</div> -->
+
+</body>
+</html>
